@@ -55,9 +55,24 @@
     const { useState, useEffect } = React;
 
    // ProjectCard Component
-   const ProjectCard = ({ project, onToggleExpand, isExpanded, onCompletionChange, onDeleteProject }) => {
+   const ProjectCard = ({ project, onToggleExpand, isExpanded, onCompletionChange, onDeleteProject, onUpdateProject }) => {
         const [showSlider, setShowSlider] = useState(false);
         const [tempCompletionPercentage, setTempCompletionPercentage] = useState(null);
+        const [showDetailsEdit, setShowDetailsEdit] = useState(false);
+        const [editProject, setEditProject] = useState(null);
+
+        useEffect(() => {
+            if (showDetailsEdit) {
+                setEditProject({
+                    ...project,
+                    tags: project.tags.join(', '), // Convert tags array to comma-separated string for the input
+                    subtasks: project.subtasks.map(task => task.name).join('\n') // Convert subtasks array to newline-separated string for the textarea
+                });
+            } else {
+                setEditProject(null);
+            }
+        }, [showDetailsEdit, project]);
+
         const tagColors = ['#ef4444', '#10b981', '#3b82f6', '#f59e0b', '#8b5cf6'];
         const getTagColor = (tag) => {
             const hash = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -82,7 +97,7 @@
                              e.stopPropagation();
                              setShowSlider(!showSlider);
                          }}
-                         className="text-gray-500 hover:text-gray-700 focus:outline-none text-2xl"
+                         className="text-green-500 hover:text-green-700 focus:outline-none text-2xl"
                      >
                          &#9998;
                      </button>
@@ -149,29 +164,121 @@
                </div>
                {isExpanded && (
                    <div className="mt-2 p-4 bg-gray-50 rounded-lg">
-                       <h4 className="text-md font-medium text-gray-700">Details</h4>
-                       <p className="text-gray-600">{project.full_description}</p>
-                       <h4 className="text-md font-medium text-gray-700 mt-2">Subtasks</h4>
-                       <ul className="list-disc pl-5 text-gray-600">
-                           {project.subtasks.map((subtask, index) => (
-                               <li key={index}>
-                                   {subtask.name} - {subtask.completed ? 'Done' : 'Pending'}
-                               </li>
-                          ))}
-                      </ul>
-                      <div className="flex justify-end">
-                          <button
-                              onClick={() => onDeleteProject(project.id)}
-                              className="text-red-500 hover:text-red-700 focus:outline-none mt-2"
-                          >
-                              &#10060; <span className="text-sm">DELETE</span>
-                          </button>
-                      </div>
-                  </div>
-              )}
-          </div>
-      );
-  };
+                       <div className="flex items-center justify-between">
+                           <h4 className="text-md font-medium text-gray-700">Details</h4>
+                           <button
+                               onClick={() => setShowDetailsEdit(!showDetailsEdit)}
+                               className="text-gray-500 hover:text-gray-700 focus:outline-none text-xl"
+                           >
+                               &#9998;
+                           </button>
+                       </div>
+                       {showDetailsEdit && editProject ? (
+                           <div>
+                               <div className="mt-4">
+                                   <label className="block text-sm font-medium text-gray-700">Title</label>
+                                   <input
+                                       type="text"
+                                       value={editProject.title}
+                                       onChange={(e) => setEditProject({ ...editProject, title: e.target.value })}
+                                       className="mt-1 p-2 w-full border rounded"
+                                       required
+                                   />
+                               </div>
+                               <div className="mt-4">
+                                   <label className="block text-sm font-medium text-gray-700">Short Description</label>
+                                   <textarea
+                                       value={editProject.description}
+                                       onChange={(e) => setEditProject({ ...editProject, description: e.target.value })}
+                                       className="mt-1 p-2 w-full border rounded"
+                                       rows="3"
+                                       required
+                                   ></textarea>
+                               </div>
+                               <div className="mt-4">
+                                   <label className="block text-sm font-medium text-gray-700">Full Description</label>
+                                   <textarea
+                                       value={editProject.full_description}
+                                       onChange={(e) => setEditProject({ ...editProject, full_description: e.target.value })}
+                                       className="mt-1 p-2 w-full border rounded"
+                                       rows="4"
+                                   ></textarea>
+                               </div>
+                               <div className="mt-4">
+                                   <label className="block text-sm font-medium text-gray-700">Tags (comma-separated)</label>
+                                   <input
+                                       type="text"
+                                       value={editProject.tags}
+                                       onChange={(e) => setEditProject({ ...editProject, tags: e.target.value })}
+                                       className="mt-1 p-2 w-full border rounded"
+                                   />
+                               </div>
+                               <div className="mt-4">
+                                   <label className="block text-sm font-medium text-gray-700">Subtasks (one per line)</label>
+                                   <textarea
+                                       value={editProject.subtasks}
+                                       onChange={(e) => setEditProject({ ...editProject, subtasks: e.target.value })}
+                                       className="mt-1 p-2 w-full border rounded"
+                                       rows="4"
+                                   ></textarea>
+                               </div>
+                               <div className="flex justify-end space-x-2 mt-4">
+                                   <button
+                                       onClick={() => {
+                                           const updatedProject = {
+                                               ...project,
+                                               title: editProject.title,
+                                               description: editProject.description,
+                                               full_description: editProject.full_description,
+                                               tags: editProject.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+                                               subtasks: editProject.subtasks.split('\n').map(task => ({
+                                                   name: task.trim(),
+                                                   completed: project.subtasks.find(st => st.name === task.trim())?.completed || false
+                                               })).filter(task => task.name),
+                                           };
+                                           onUpdateProject(updatedProject);
+                                           setShowDetailsEdit(false);
+                                       }}
+                                       className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                                   >
+                                       Save
+                                   </button>
+                                   <button
+                                       onClick={() => {
+                                           setShowDetailsEdit(false);
+                                       }}
+                                       className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
+                                   >
+                                       Cancel
+                                   </button>
+                               </div>
+                           </div>
+                       ) : (
+                           <>
+                               <p className="text-gray-600">{project.full_description}</p>
+                               <h4 className="text-md font-medium text-gray-700 mt-2">Subtasks</h4>
+                               <ul className="list-disc pl-5 text-gray-600">
+                                   {project.subtasks.map((subtask, index) => (
+                                       <li key={index}>
+                                           {subtask.name} - {subtask.completed ? 'Done' : 'Pending'}
+                                       </li>
+                                   ))}
+                               </ul>
+                           </>
+                       )}
+                       <div className="flex justify-end">
+                           <button
+                               onClick={() => onDeleteProject(project.id)}
+                               className="text-red-500 hover:text-red-700 focus:outline-none mt-2"
+                           >
+                               &#10060; <span className="text-sm">DELETE</span>
+                           </button>
+                       </div>
+                   </div>
+               )}
+           </div>
+       );
+   };
 
    // AddIdeaForm Component
    const AddIdeaForm = ({ onAddProject, onClose }) => {
@@ -339,15 +446,27 @@
         setProjects(updatedProjects);
     };
 
-      const exportAsJpg = () => {
-        const board = document.querySelector('#ideaFlowBoard');
-        window.html2canvas(board).then((canvas) => {
-          const link = document.createElement('a');
-          link.download = 'IdeaFlow-Board.jpg';
-          link.href = canvas.toDataURL('image/jpeg');
-          link.click();
+    const updateProject = (updatedProject) => {
+        const updatedProjects = projects.map(project => {
+            if (project.id === updatedProject.id) {
+                // Recalculate status based on completion percentage
+                const newStatus = updatedProject.completion_percentage === 0 ? 'to do' : updatedProject.completion_percentage === 100 ? 'done' : 'doing';
+                return { ...updatedProject, status: newStatus };
+            }
+            return project;
         });
-      };
+        setProjects(updatedProjects);
+    };
+
+       const exportAsJpg = () => {
+         const board = document.querySelector('#ideaFlowBoard');
+         window.html2canvas(board).then((canvas) => {
+           const link = document.createElement('a');
+           link.download = 'IdeaFlow-Board.jpg';
+           link.href = canvas.toDataURL('image/jpeg');
+           link.click();
+         });
+       };
 
       const blocks = [
         { status: 'done', title: 'Done', bgColor: 'bg-green-100', headerColor: 'bg-green-500' },
@@ -422,6 +541,7 @@
                         isExpanded={expandedProjects[project.id]}
                         onCompletionChange={handleCompletionChange}
                         onDeleteProject={deleteProject}
+                        onUpdateProject={updateProject}
                       />
                     ))}
                 </div>
