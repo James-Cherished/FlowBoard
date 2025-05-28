@@ -297,6 +297,39 @@
             >
               Export as JPG
             </button>
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => {
+                const element = document.createElement("a");
+                const file = new Blob(
+                  [JSON.stringify(projects)],
+                  {type: 'application/json'}
+                );
+                element.href = URL.createObjectURL(file);
+                element.download = "ideaFlowBoard.json";
+                document.body.appendChild(element); // Required for this to work in FireFox
+                element.click();
+              }}
+            >
+              Export Board (JSON)
+            </button>
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => document.getElementById('importFile').click()}
+            >
+              Import Board (JSON)
+            </button>
+            <input type="file" id="importFile" accept=".json" style={{display: "none"}} onChange={(event) => {
+              const file = event.target.files[0];
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                const json = JSON.parse(event.target.result);
+                if (window.confirm("Importing will overwrite your current board data. Are you sure?")) {
+                  setProjects(json);
+                }
+              }
+              reader.readAsText(file);
+            }}/>
           </div>
           <div id="ideaFlowBoard">
             {blocks.map((block) => (
