@@ -55,13 +55,14 @@
     const { useState, useEffect } = React;
 
    // ProjectCard Component
-   const ProjectCard = ({ project, onToggleExpand, isExpanded, onCompletionChange }) => {
-       const [showSlider, setShowSlider] = useState(false);
-       const tagColors = ['#ef4444', '#10b981', '#3b82f6', '#f59e0b', '#8b5cf6'];
-       const getTagColor = (tag) => {
-           const hash = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-           return tagColors[hash % tagColors.length];
-       };
+   const ProjectCard = ({ project, onToggleExpand, isExpanded, onCompletionChange, onDeleteProject }) => {
+        const [showSlider, setShowSlider] = useState(false);
+        const [tempCompletionPercentage, setTempCompletionPercentage] = useState(null);
+        const tagColors = ['#ef4444', '#10b981', '#3b82f6', '#f59e0b', '#8b5cf6'];
+        const getTagColor = (tag) => {
+            const hash = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            return tagColors[hash % tagColors.length];
+        };
 
       const cardColor = project.status === 'doing' && project.tags.length > 0 
         ? getTagColor(project.tags[0]) 
@@ -95,28 +96,48 @@
                                    min="0"
                                    max="100"
                                    step="10"
-                                   value={project.completion_percentage}
-                                   onChange={(e) => onCompletionChange(project.id, Number(e.target.value))}
+                                   value={tempCompletionPercentage !== null ? tempCompletionPercentage : project.completion_percentage}
+                                   onChange={(e) => setTempCompletionPercentage(Number(e.target.value))}
                                    className="w-full"
-                               />
-                               <span className="text-sm text-gray-500">{project.completion_percentage}%</span>
-                           </div>
-                       ) : (
-                           project.status !== 'to do' && (
-                               <div>
-                                   <progress
-                                       className="w-full h-2 rounded"
-                                       value={project.completion_percentage}
-                                       max="100"
-                                   />
-                                   <span className="text-sm text-gray-500">{project.completion_percentage}%</span>
-                               </div>
-                           )
-                       )}
-                   </div>
-                   <div className="mt-2 flex flex-wrap gap-1">
-                       {project.tags.map((tag) => (
-                           <span
+                              />
+                              {tempCompletionPercentage !== null ? (
+                                  <>
+                                      <button
+                                          onClick={() => {
+                                              onCompletionChange(project.id, tempCompletionPercentage);
+                                              setTempCompletionPercentage(null);
+                                          }}
+                                          className="text-green-500 hover:text-green-700 focus:outline-none ml-2"
+                                      >
+                                          &#10004;
+                                      </button>
+                                      <button
+                                          onClick={() => setTempCompletionPercentage(null)}
+                                          className="text-gray-500 hover:text-gray-700 focus:outline-none ml-2"
+                                      >
+                                          &#10006;
+                                      </button>
+                                  </>
+                              ) : (
+                                  <span className="text-sm text-gray-500">{project.completion_percentage}%</span>
+                              )}
+                      </div>
+                  ) : (
+                      project.status !== 'to do' && (
+                          <div>
+                              <progress
+                                  className="w-full h-2 rounded"
+                                  value={project.completion_percentage}
+                                  max="100"
+                              />
+                              <span className="text-sm text-gray-500">{project.completion_percentage}%</span>
+                          </div>
+                      )
+                  )}
+              </div>
+              <div className="mt-2 flex flex-wrap gap-1">
+                  {project.tags.map((tag) => (
+                      <span
                                key={tag}
                                className="text-xs text-white px-2 py-1 rounded"
                                style={{ backgroundColor: getTagColor(tag) }}
@@ -136,13 +157,21 @@
                                <li key={index}>
                                    {subtask.name} - {subtask.completed ? 'Done' : 'Pending'}
                                </li>
-                           ))}
-                       </ul>
-                   </div>
-               )}
-           </div>
-       );
-   };
+                          ))}
+                      </ul>
+                      <div className="flex justify-end">
+                          <button
+                              onClick={() => onDeleteProject(project.id)}
+                              className="text-red-500 hover:text-red-700 focus:outline-none mt-2"
+                          >
+                              &#10060; <span className="text-sm">DELETE</span>
+                          </button>
+                      </div>
+                  </div>
+              )}
+          </div>
+      );
+  };
 
    // AddIdeaForm Component
    const AddIdeaForm = ({ onAddProject, onClose }) => {
@@ -292,18 +321,23 @@
           ...prev,
           [projectId]: !prev[projectId],
         }));
-      };
+    };
 
-      const handleCompletionChange = (projectId, newPercentage) => {
+    const handleCompletionChange = (projectId, newPercentage) => {
         const updatedProjects = projects.map(project => {
-          if (project.id === projectId) {
-            const newStatus = newPercentage === 0 ? 'to do' : newPercentage === 100 ? 'done' : 'doing';
-            return { ...project, completion_percentage: newPercentage, status: newStatus };
-          }
-          return project;
+            if (project.id === projectId) {
+                const newStatus = newPercentage === 0 ? 'to do' : newPercentage === 100 ? 'done' : 'doing';
+                return { ...project, completion_percentage: newPercentage, status: newStatus };
+            }
+            return project;
         });
         setProjects(updatedProjects);
-      };
+    };
+
+    const deleteProject = (projectId) => {
+        const updatedProjects = projects.filter(project => project.id !== projectId);
+        setProjects(updatedProjects);
+    };
 
       const exportAsJpg = () => {
         const board = document.querySelector('#ideaFlowBoard');
@@ -387,6 +421,7 @@
                         onToggleExpand={toggleExpand}
                         isExpanded={expandedProjects[project.id]}
                         onCompletionChange={handleCompletionChange}
+                        onDeleteProject={deleteProject}
                       />
                     ))}
                 </div>
