@@ -922,10 +922,18 @@
       const [expandedProjects, setExpandedProjects] = useState({});
       const [showForm, setShowForm] = useState(false);
       const [showResetDialog, setShowResetDialog] = useState(false);
+      const [isHorizontalLayout, setIsHorizontalLayout] = useState(() => {
+        const saved = localStorage.getItem('ideaFlowLayout');
+        return saved ? JSON.parse(saved) : true; // Default to horizontal layout
+      });
 
       useEffect(() => {
         localStorage.setItem('ideaFlowProjects', JSON.stringify(projects));
       }, [projects]);
+
+      useEffect(() => {
+        localStorage.setItem('ideaFlowLayout', JSON.stringify(isHorizontalLayout));
+      }, [isHorizontalLayout]);
 
       const addProject = (project) => {
         setProjects([...projects, project]);
@@ -969,6 +977,10 @@
     const resetBoard = () => {
         localStorage.removeItem('ideaFlowProjects');
         window.location.reload();
+    };
+
+    const toggleLayout = () => {
+        setIsHorizontalLayout(!isHorizontalLayout);
     };
 
        const exportAsJpg = () => {
@@ -1049,6 +1061,13 @@
                >
                  Import Board (JSON)
                </button>
+               <button
+                 className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                 onClick={toggleLayout}
+                 title={`Switch to ${isHorizontalLayout ? 'Vertical' : 'Horizontal'} Layout`}
+               >
+                 {isHorizontalLayout ? '⬌' : '⬆'} Layout
+               </button>
              </div>
              <button
                className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 ml-auto"
@@ -1075,9 +1094,9 @@
                reader.readAsText(file);
              }}/>
            </div>
-           <div id="ideaFlowBoard" className="flex flex-col md:flex-row overflow-x-auto md:overflow-visible gap-4 pb-4">
+           <div id="ideaFlowBoard" className={`flex gap-4 pb-4 ${isHorizontalLayout ? 'md:flex-row overflow-x-auto md:overflow-visible' : 'flex-col'}`}>
              {blocks.map((block) => (
-               <div key={block.status} className={`flex-shrink-0 w-full md:w-80 p-4 rounded-lg ${block.bgColor}`}>
+               <div key={block.status} className={`flex-1 min-w-0 p-4 rounded-lg ${block.bgColor}`}>
                  <h2 className={`text-xl font-semibold text-white p-2 rounded ${block.headerColor}`}>
                    {block.title}
                  </h2>
