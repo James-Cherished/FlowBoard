@@ -42,6 +42,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon_io/android-chrome-512x512.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
   <title>IdeaFlow</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
@@ -270,9 +280,11 @@
                        <div className="flex justify-end">
                            <button
                                onClick={() => onDeleteProject(project.id)}
-                               className="text-red-500 hover:text-red-700 mt-2 p-2"
+                               className="text-red-400 hover:text-red-600 mt-2 px-3 py-1 rounded-lg transition-all duration-200 ease-in-out hover:bg-red-50 border border-transparent hover:border-red-200"
+                               title="Delete project"
                            >
-                               &#10060; <span className="text-sm">DELETE</span>
+                               <span className="text-sm mr-1">🗑️</span>
+                               <span className="text-xs font-medium">DELETE</span>
                            </button>
                        </div>
                    </div>
@@ -416,22 +428,6 @@
             ],
           },
           {
-            id: '2',
-            title: 'Machine Learning Portfolio Website',
-            description: 'Personal portfolio showcasing ML projects and certifications',
-            full_description: 'Built a responsive website featuring my machine learning projects, including interactive demos, technical writeups, and downloadable datasets. Implemented modern web technologies and optimized for mobile devices.',
-            completion_percentage: 100,
-            status: 'done',
-            tags: ['demo', 'work', 'ml', 'portfolio'],
-            subtasks: [
-              { name: 'Design website wireframes', completed: true },
-              { name: 'Implement responsive layout', completed: true },
-              { name: 'Add interactive ML demos', completed: true },
-              { name: 'Optimize for performance', completed: true },
-              { name: 'Deploy to production', completed: true },
-            ],
-          },
-          {
             id: '3',
             title: 'Automated Testing Framework',
             description: 'Comprehensive testing suite for company projects',
@@ -556,23 +552,6 @@
 
           // TO DO PROJECTS - Ready to start
           {
-            id: '10',
-            title: 'Blockchain Voting System',
-            description: 'Secure and transparent voting platform using blockchain technology',
-            full_description: 'Designing a blockchain-based voting system that ensures transparency, immutability, and voter privacy. Using Ethereum smart contracts for secure vote recording and zero-knowledge proofs for voter anonymity.',
-            completion_percentage: 0,
-            status: 'to do',
-            tags: ['demo', 'work', 'blockchain', 'voting', 'ethereum'],
-            subtasks: [
-              { name: 'Research blockchain voting best practices', completed: false },
-              { name: 'Design smart contract architecture', completed: false },
-              { name: 'Implement smart contracts', completed: false },
-              { name: 'Build voter interface', completed: false },
-              { name: 'Implement admin dashboard', completed: false },
-              { name: 'Security audit and testing', completed: false },
-            ],
-          },
-          {
             id: '11',
             title: 'AR/VR Training Platform',
             description: 'Immersive training platform using AR/VR technologies',
@@ -611,8 +590,8 @@
             title: 'Personal Finance Tracker',
             description: 'Comprehensive personal finance management application',
             full_description: 'Building a personal finance tracker that categorizes expenses, provides spending insights, and helps with budgeting. Integrating with multiple bank APIs and providing beautiful data visualizations.',
-            completion_percentage: 90,
-            status: 'doing',
+            completion_percentage: 100,
+            status: 'done',
             tags: ['demo', 'personal', 'finance', 'react'],
             subtasks: [
               { name: 'Design application UI/UX', completed: true },
@@ -620,8 +599,8 @@
               { name: 'Add income tracking', completed: true },
               { name: 'Create budget planning features', completed: true },
               { name: 'Implement data visualization', completed: true },
-              { name: 'Add bank API integration', completed: false },
-              { name: 'Deploy to app stores', completed: false },
+              { name: 'Add bank API integration', completed: true },
+              { name: 'Deploy to app stores', completed: true },
             ],
           },
           {
@@ -663,12 +642,12 @@
             title: 'Home Security System',
             description: 'DIY home security system with computer vision',
             full_description: 'Building a comprehensive home security system using Raspberry Pi, cameras, and computer vision. Features include motion detection, face recognition, mobile alerts, and cloud storage.',
-            completion_percentage: 20,
-            status: 'doing',
+            completion_percentage: 0,
+            status: 'to do',
             tags: ['demo', 'personal', 'security', 'computer-vision', 'raspberry-pi'],
             subtasks: [
-              { name: 'Research security system requirements', completed: true },
-              { name: 'Design system architecture', completed: true },
+              { name: 'Research security system requirements', completed: false },
+              { name: 'Design system architecture', completed: false },
               { name: 'Set up Raspberry Pi hardware', completed: false },
               { name: 'Implement motion detection', completed: false },
               { name: 'Add face recognition capability', completed: false },
@@ -680,12 +659,12 @@
             title: 'Virtual Art Gallery',
             description: '3D virtual gallery for showcasing digital artwork',
             full_description: 'Creating an immersive 3D virtual art gallery where artists can showcase their digital artwork. Visitors can walk through the gallery using WASD controls and view art pieces in a realistic environment.',
-            completion_percentage: 10,
-            status: 'doing',
+            completion_percentage: 0,
+            status: 'to do',
             tags: ['demo', 'personal', '3d', 'art', 'webgl'],
             subtasks: [
-              { name: 'Design gallery layout and navigation', completed: true },
-              { name: 'Research 3D web technologies (Three.js)', completed: true },
+              { name: 'Design gallery layout and navigation', completed: false },
+              { name: 'Research 3D web technologies (Three.js)', completed: false },
               { name: 'Create 3D gallery environment', completed: false },
               { name: 'Implement artwork display system', completed: false },
               { name: 'Add artist profile pages', completed: false },
@@ -750,16 +729,16 @@
             title: 'Cybersecurity Certification Study',
             description: 'Preparing for CISSP and OSCP certifications',
             full_description: 'Comprehensive study program for cybersecurity certifications including CISSP (Certified Information Systems Security Professional) and OSCP (Offensive Security Certified Professional).',
-            completion_percentage: 80,
-            status: 'doing',
+            completion_percentage: 100,
+            status: 'done',
             tags: ['demo', 'learning', 'cybersecurity', 'certification'],
             subtasks: [
               { name: 'Study information security concepts', completed: true },
               { name: 'Complete CISSP practice exams', completed: true },
               { name: 'Learn penetration testing techniques', completed: true },
               { name: 'Set up penetration testing lab', completed: true },
-              { name: 'Take OSCP practice challenges', completed: false },
-              { name: 'Schedule certification exams', completed: false },
+              { name: 'Take OSCP practice challenges', completed: true },
+              { name: 'Schedule certification exams', completed: true },
             ],
           },
           {
@@ -784,12 +763,12 @@
             title: 'Web3 and DeFi Development',
             description: 'Learning blockchain development and decentralized finance',
             full_description: 'Exploring Web3 development by building decentralized applications (dApps) and smart contracts. Understanding DeFi protocols and implementing automated market makers.',
-            completion_percentage: 20,
-            status: 'doing',
+            completion_percentage: 0,
+            status: 'to do',
             tags: ['demo', 'learning', 'web3', 'defi', 'smart-contracts'],
             subtasks: [
-              { name: 'Study blockchain fundamentals', completed: true },
-              { name: 'Learn Solidity programming', completed: true },
+              { name: 'Study blockchain fundamentals', completed: false },
+              { name: 'Learn Solidity programming', completed: false },
               { name: 'Build basic smart contracts', completed: false },
               { name: 'Create ERC-20 token', completed: false },
               { name: 'Implement decentralized exchange', completed: false },
@@ -803,16 +782,16 @@
             title: 'Fitness Goal Achievement',
             description: 'Structured fitness program with measurable milestones',
             full_description: 'Following a comprehensive 12-week fitness program combining strength training, cardio, and flexibility work. Tracking progress through various metrics and adjusting workout intensity based on results.',
-            completion_percentage: 85,
-            status: 'doing',
+            completion_percentage: 100,
+            status: 'done',
             tags: ['demo', 'life', 'fitness', 'health', 'goals'],
             subtasks: [
               { name: 'Design personalized workout plan', completed: true },
               { name: 'Establish baseline measurements', completed: true },
               { name: 'Complete 4-week strength training phase', completed: true },
               { name: 'Complete 4-week cardio improvement phase', completed: true },
-              { name: 'Start 4-week flexibility and maintenance phase', completed: false },
-              { name: 'Achieve target weight and muscle mass goals', completed: false },
+              { name: 'Complete 4-week flexibility and maintenance phase', completed: true },
+              { name: 'Achieve target weight and muscle mass goals', completed: true },
             ],
           },
           {
@@ -854,16 +833,16 @@
             title: 'Language Learning Journey',
             description: 'Achieving conversational fluency in Spanish',
             full_description: 'Dedicated Spanish language learning program using multiple methods including online courses, conversation practice, and cultural immersion activities. Target: conversational fluency within 18 months.',
-            completion_percentage: 75,
-            status: 'doing',
+            completion_percentage: 100,
+            status: 'done',
             tags: ['demo', 'life', 'language-learning', 'spanish', 'culture'],
             subtasks: [
               { name: 'Complete beginner Spanish course', completed: true },
               { name: 'Master basic grammar and vocabulary', completed: true },
               { name: 'Start conversation practice sessions', completed: true },
               { name: 'Watch Spanish movies without subtitles', completed: true },
-              { name: 'Plan immersion trip to Spanish-speaking country', completed: false },
-              { name: 'Take formal Spanish proficiency exam', completed: false },
+              { name: 'Plan immersion trip to Spanish-speaking country', completed: true },
+              { name: 'Take formal Spanish proficiency exam', completed: true },
             ],
           },
           {
@@ -926,6 +905,9 @@
         const saved = localStorage.getItem('ideaFlowLayout');
         return saved ? JSON.parse(saved) : true; // Default to horizontal layout
       });
+      const [hasExitedDemo, setHasExitedDemo] = useState(() => {
+        return localStorage.getItem('ideaFlowHasExitedDemo') === 'true';
+      });
 
       useEffect(() => {
         localStorage.setItem('ideaFlowProjects', JSON.stringify(projects));
@@ -934,6 +916,10 @@
       useEffect(() => {
         localStorage.setItem('ideaFlowLayout', JSON.stringify(isHorizontalLayout));
       }, [isHorizontalLayout]);
+
+      useEffect(() => {
+        localStorage.setItem('ideaFlowHasExitedDemo', JSON.stringify(hasExitedDemo));
+      }, [hasExitedDemo]);
 
       const addProject = (project) => {
         setProjects([...projects, project]);
@@ -979,6 +965,13 @@
         window.location.reload();
     };
 
+    const clearBoard = () => {
+        setProjects([]);
+        setExpandedProjects({});
+        setHasExitedDemo(true);
+        setShowResetDialog(false);
+    };
+
     const toggleLayout = () => {
         setIsHorizontalLayout(!isHorizontalLayout);
     };
@@ -1016,16 +1009,34 @@
 
        return (
          <div className="container mx-auto p-4 w-full">
-           <h1 className="text-2xl font-bold mb-2">IdeaFlow: Your Project Board that just Flows!</h1>
-           <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4 rounded">
-             <div className="flex items-center">
-               <div className="text-yellow-700">
-                 <div className="font-bold text-center mb-3">DEMO MODE</div>
-                 <div className="text-sm text-center">The demo data showcases the powerful extent of this private project management webapp across work, personal projects and life goals. You can freely modify or delete any of this to create your own project board.</div>
+           <h1 className="text-2xl font-bold mb-6 text-center">FlowBoard: Your Project Board that just Flows!</h1>
+           {!hasExitedDemo && (
+             <div className="bg-yellow-100 border-l-4 border-yellow-500 pt-2 pb-4 mb-4 rounded">
+               <div className="flex items-center justify-center">
+                 <div className="text-yellow-700">
+                   <div className="font-bold text-center">DEMO MODE</div>
+                   <div className="text-sm text-center">The demo data showcases the powerful extent of this private project management webapp across work, personal projects and life goals. You can freely modify or delete any of this to create your own project board.</div>
+                 </div>
+                 <button
+                   onClick={() => setShowResetDialog(true)}
+                   className="ml-4 text-yellow-700 hover:text-red-600 transition-colors duration-200 p-2 rounded-full hover:bg-red-100 flex items-center justify-center"
+                   title="Exit Demo - Clear All Data"
+                 >
+                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                   </svg>
+                 </button>
                </div>
              </div>
-           </div>
+           )}
            <div className="mb-4 flex items-center">
+             <button
+               className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 mr-2"
+               onClick={toggleLayout}
+               title={`Switch to ${isHorizontalLayout ? 'Vertical' : 'Horizontal'} Layout`}
+             >
+               {isHorizontalLayout ? '⬌' : '⬆'}
+             </button>
              <button
                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mr-2"
                onClick={() => setShowForm(true)}
@@ -1038,39 +1049,30 @@
              >
               Clear Board
              </button>
-             <div className="flex space-x-2 mx-auto">
-               <button
-                 className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
-                 onClick={() => {
-                   const element = document.createElement("a");
-                   const file = new Blob(
-                     [JSON.stringify(projects)],
-                     {type: 'application/json'}
-                   );
-                   element.href = URL.createObjectURL(file);
-                   element.download = "ideaFlowBoard.json";
-                   document.body.appendChild(element); // Required for this to work in FireFox
-                   element.click();
-                 }}
-               >
-                 Export Board (JSON)
-               </button>
-               <button
-                 className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
-                 onClick={() => document.getElementById('importFile').click()}
-               >
-                 Import Board (JSON)
-               </button>
-               <button
-                 className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
-                 onClick={toggleLayout}
-                 title={`Switch to ${isHorizontalLayout ? 'Vertical' : 'Horizontal'} Layout`}
-               >
-                 {isHorizontalLayout ? '⬌' : '⬆'} Layout
-               </button>
-             </div>
              <button
-               className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 ml-auto"
+               className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 mr-2"
+               onClick={() => document.getElementById('importFile').click()}
+             >
+               Import Board (JSON)
+             </button>
+             <button
+               className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
+               onClick={() => {
+                 const element = document.createElement("a");
+                 const file = new Blob(
+                   [JSON.stringify(projects)],
+                   {type: 'application/json'}
+                 );
+                 element.href = URL.createObjectURL(file);
+                 element.download = "ideaFlowBoard.json";
+                 document.body.appendChild(element); // Required for this to work in FireFox
+                 element.click();
+               }}
+             >
+               Export Board (JSON)
+             </button>
+             <button
+               className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 ml-4"
                onClick={exportAsJpg}
              >
                JPG
@@ -1141,16 +1143,16 @@
                      <li>All custom project modifications</li>
                    </ul>
                    <p className="text-gray-700 text-sm mb-2">
-                     <strong>After reset:</strong>
+                     <strong>After clearing:</strong>
                    </p>
                    <ul className="list-disc pl-5 text-gray-700 text-sm mb-3">
-                     <li>Board will reload with original demo data (30 sample projects)</li>
-                     <li>All current progress will be lost forever</li>
+                     <li>Board will be completely empty (0 projects)</li>
+                     <li>You can start fresh by adding your own ideas</li>
                      <li>Action cannot be undone</li>
                    </ul>
-                   <div className="bg-red-50 border border-red-200 rounded p-3 mb-3">
-                     <p className="text-red-700 text-sm">
-                       <strong>Recommendation:</strong> Use "Export Board (JSON)" before resetting to backup your data.
+                   <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-3">
+                     <p className="text-blue-700 text-sm">
+                       <strong>Tip:</strong> Use "Export Board (JSON)" before clearing to backup your data.
                      </p>
                    </div>
                  </div>
@@ -1164,12 +1166,12 @@
                    <button
                      onClick={() => {
                        if (window.confirm("Are you absolutely sure? This will delete ALL your current projects permanently!")) {
-                         resetBoard();
+                         clearBoard();
                        }
                      }}
                      className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                    >
-                     Yes, Delete Everything
+                     Yes, Clear Everything
                    </button>
                  </div>
                </div>
