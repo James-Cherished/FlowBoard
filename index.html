@@ -398,23 +398,530 @@
       const [projects, setProjects] = useState(() => {
         const saved = localStorage.getItem('ideaFlowProjects');
         return saved ? JSON.parse(saved) : [
+          // DONE PROJECTS - All completed work
           {
             id: '1',
-            title: 'Build Web App',
-            description: 'Create a project management tool',
-            full_description: 'Develop a web application to organize and track project ideas.',
+            title: 'FlowBoard Project Management App',
+            description: 'Complete project management tool with React and localStorage',
+            full_description: 'Successfully developed and deployed a comprehensive project management application using React, featuring drag-and-drop functionality, local persistence, and export capabilities. This demo showcases the full potential of the FlowBoard concept.',
             completion_percentage: 100,
             status: 'done',
-            tags: ['work', 'coding'],
+            tags: ['work', 'react', 'completed'],
             subtasks: [
-              { name: 'Design UI', completed: true },
-              { name: 'Code Backend', completed: true },
+              { name: 'Design application architecture', completed: true },
+              { name: 'Implement React components', completed: true },
+              { name: 'Add localStorage persistence', completed: true },
+              { name: 'Create export functionality', completed: true },
+              { name: 'Write comprehensive documentation', completed: true },
+            ],
+          },
+          {
+            id: '2',
+            title: 'Machine Learning Portfolio Website',
+            description: 'Personal portfolio showcasing ML projects and certifications',
+            full_description: 'Built a responsive website featuring my machine learning projects, including interactive demos, technical writeups, and downloadable datasets. Implemented modern web technologies and optimized for mobile devices.',
+            completion_percentage: 100,
+            status: 'done',
+            tags: ['demo', 'work', 'ml', 'portfolio'],
+            subtasks: [
+              { name: 'Design website wireframes', completed: true },
+              { name: 'Implement responsive layout', completed: true },
+              { name: 'Add interactive ML demos', completed: true },
+              { name: 'Optimize for performance', completed: true },
+              { name: 'Deploy to production', completed: true },
+            ],
+          },
+          {
+            id: '3',
+            title: 'Automated Testing Framework',
+            description: 'Comprehensive testing suite for company projects',
+            full_description: 'Created an automated testing framework that increased code coverage from 60% to 95% and reduced regression testing time by 75%. Integrated with CI/CD pipeline for continuous quality assurance.',
+            completion_percentage: 100,
+            status: 'done',
+            tags: ['demo', 'work', 'testing', 'automation'],
+            subtasks: [
+              { name: 'Research testing best practices', completed: true },
+              { name: 'Design framework architecture', completed: true },
+              { name: 'Implement test cases', completed: true },
+              { name: 'Integrate with CI/CD', completed: true },
+              { name: 'Train team on framework usage', completed: true },
+            ],
+          },
+
+          // DOING PROJECTS - Currently in progress
+          {
+            id: '4',
+            title: 'E-commerce API Refactoring',
+            description: 'Modernizing legacy e-commerce backend with GraphQL',
+            full_description: 'Leading the modernization of our e-commerce platform by replacing REST APIs with GraphQL, improving query efficiency by 40% and reducing bandwidth usage. Working with cross-functional team to ensure seamless migration.',
+            completion_percentage: 80,
+            status: 'doing',
+            tags: ['demo', 'work', 'api', 'graphql', 'refactoring'],
+            subtasks: [
+              { name: 'Analyze current REST API structure', completed: true },
+              { name: 'Design GraphQL schema', completed: true },
+              { name: 'Implement resolvers for core entities', completed: true },
+              { name: 'Add authentication and authorization', completed: true },
+              { name: 'Write comprehensive tests', completed: false },
+              { name: 'Deploy to staging environment', completed: false },
+            ],
+          },
+          {
+            id: '5',
+            title: 'DevOps Migration to Kubernetes',
+            description: 'Moving containerized applications from Docker Compose to K8s',
+            full_description: 'Orchestrating the migration of 15 microservices from Docker Compose to Kubernetes cluster. This involves creating deployment manifests, setting up monitoring, and ensuring zero-downtime deployments.',
+            completion_percentage: 60,
+            status: 'doing',
+            tags: ['demo', 'work', 'devops', 'kubernetes', 'migration'],
+            subtasks: [
+              { name: 'Set up Kubernetes cluster', completed: true },
+              { name: 'Create Docker images for all services', completed: true },
+              { name: 'Write Kubernetes manifests', completed: true },
+              { name: 'Set up monitoring with Prometheus', completed: true },
+              { name: 'Implement service mesh (Istio)', completed: false },
+              { name: 'Migration testing', completed: false },
+              { name: 'Team training sessions', completed: false },
+            ],
+          },
+          {
+            id: '6',
+            title: 'Real-time Chat Application',
+            description: 'Building WebSocket-based chat app with React and Node.js',
+            full_description: 'Developing a real-time chat application featuring group chats, private messages, file sharing, and emoji reactions. Using Socket.io for real-time communication and implementing end-to-end encryption.',
+            completion_percentage: 70,
+            status: 'doing',
+            tags: ['demo', 'work', 'websocket', 'react', 'nodejs'],
+            subtasks: [
+              { name: 'Set up project structure and dependencies', completed: true },
+              { name: 'Implement user authentication', completed: true },
+              { name: 'Create basic chat interface', completed: true },
+              { name: 'Add real-time messaging with Socket.io', completed: true },
+              { name: 'Implement file upload functionality', completed: false },
+              { name: 'Add end-to-end encryption', completed: false },
+              { name: 'Mobile responsive design', completed: false },
+            ],
+          },
+          {
+            id: '7',
+            title: 'Data Pipeline Optimization',
+            description: 'Optimizing ETL pipeline processing 10M+ daily records',
+            full_description: 'Optimizing our data ingestion pipeline to handle increased load. Implementing streaming architecture with Apache Kafka and improving processing speed from 2 hours to 30 minutes for daily batch jobs.',
+            completion_percentage: 50,
+            status: 'doing',
+            tags: ['demo', 'work', 'data', 'kafka', 'optimization'],
+            subtasks: [
+              { name: 'Analyze current pipeline bottlenecks', completed: true },
+              { name: 'Design new streaming architecture', completed: true },
+              { name: 'Set up Apache Kafka cluster', completed: true },
+              { name: 'Implement Kafka producers and consumers', completed: false },
+              { name: 'Update data processing logic', completed: false },
+              { name: 'Performance testing and optimization', completed: false },
+            ],
+          },
+          {
+            id: '8',
+            title: 'Mobile App UI Components Library',
+            description: 'Creating reusable UI components for React Native',
+            full_description: 'Building a comprehensive UI component library for React Native applications. Includes design system, accessibility features, and comprehensive documentation to ensure consistency across all mobile projects.',
+            completion_percentage: 40,
+            status: 'doing',
+            tags: ['demo', 'work', 'react-native', 'ui', 'library'],
+            subtasks: [
+              { name: 'Create design system foundation', completed: true },
+              { name: 'Build basic component set (buttons, inputs, etc.)', completed: true },
+              { name: 'Add theming and customization', completed: false },
+              { name: 'Implement accessibility features', completed: false },
+              { name: 'Create comprehensive documentation', completed: false },
+              { name: 'Build component playground/demo app', completed: false },
+            ],
+          },
+          {
+            id: '9',
+            title: 'AI-Powered Code Review Tool',
+            description: 'ML-based tool for automated code quality assessment',
+            full_description: 'Developing an AI-powered tool that analyzes code submissions and provides automated feedback on code quality, security vulnerabilities, and best practices. Using transformer models trained on open-source code repositories.',
+            completion_percentage: 30,
+            status: 'doing',
+            tags: ['demo', 'work', 'ai', 'ml', 'code-review'],
+            subtasks: [
+              { name: 'Research code analysis techniques', completed: true },
+              { name: 'Collect and clean training dataset', completed: true },
+              { name: 'Design model architecture', completed: false },
+              { name: 'Train ML model for code analysis', completed: false },
+              { name: 'Implement CI/CD integration', completed: false },
+              { name: 'Build user interface', completed: false },
+            ],
+          },
+
+          // TO DO PROJECTS - Ready to start
+          {
+            id: '10',
+            title: 'Blockchain Voting System',
+            description: 'Secure and transparent voting platform using blockchain technology',
+            full_description: 'Designing a blockchain-based voting system that ensures transparency, immutability, and voter privacy. Using Ethereum smart contracts for secure vote recording and zero-knowledge proofs for voter anonymity.',
+            completion_percentage: 0,
+            status: 'to do',
+            tags: ['demo', 'work', 'blockchain', 'voting', 'ethereum'],
+            subtasks: [
+              { name: 'Research blockchain voting best practices', completed: false },
+              { name: 'Design smart contract architecture', completed: false },
+              { name: 'Implement smart contracts', completed: false },
+              { name: 'Build voter interface', completed: false },
+              { name: 'Implement admin dashboard', completed: false },
+              { name: 'Security audit and testing', completed: false },
+            ],
+          },
+          {
+            id: '11',
+            title: 'AR/VR Training Platform',
+            description: 'Immersive training platform using AR/VR technologies',
+            full_description: 'Creating an augmented and virtual reality training platform for corporate education. Implementing 3D simulations, hand tracking, and collaborative learning features to enhance employee training effectiveness.',
+            completion_percentage: 0,
+            status: 'to do',
+            tags: ['demo', 'work', 'ar', 'vr', 'training'],
+            subtasks: [
+              { name: 'Research AR/VR frameworks and tools', completed: false },
+              { name: 'Design platform architecture', completed: false },
+              { name: 'Create 3D training modules', completed: false },
+              { name: 'Implement collaborative features', completed: false },
+              { name: 'Build content management system', completed: false },
+            ],
+          },
+          {
+            id: '12',
+            title: 'IoT Home Automation Hub',
+            description: 'Centralized IoT device management and automation platform',
+            full_description: 'Building a comprehensive IoT home automation hub that can control and monitor various smart devices. Supporting multiple protocols (Zigbee, Z-Wave, WiFi) and providing an intuitive interface for home automation rules.',
+            completion_percentage: 0,
+            status: 'to do',
+            tags: ['demo', 'work', 'iot', 'automation', 'home'],
+            subtasks: [
+              { name: 'Research IoT protocols and standards', completed: false },
+              { name: 'Design system architecture', completed: false },
+              { name: 'Develop device discovery and pairing', completed: false },
+              { name: 'Create automation rule engine', completed: false },
+              { name: 'Build mobile and web interfaces', completed: false },
+            ],
+          },
+
+          // PERSONAL PROJECTS
+          {
+            id: '13',
+            title: 'Personal Finance Tracker',
+            description: 'Comprehensive personal finance management application',
+            full_description: 'Building a personal finance tracker that categorizes expenses, provides spending insights, and helps with budgeting. Integrating with multiple bank APIs and providing beautiful data visualizations.',
+            completion_percentage: 90,
+            status: 'doing',
+            tags: ['demo', 'personal', 'finance', 'react'],
+            subtasks: [
+              { name: 'Design application UI/UX', completed: true },
+              { name: 'Implement expense tracking', completed: true },
+              { name: 'Add income tracking', completed: true },
+              { name: 'Create budget planning features', completed: true },
+              { name: 'Implement data visualization', completed: true },
+              { name: 'Add bank API integration', completed: false },
+              { name: 'Deploy to app stores', completed: false },
+            ],
+          },
+          {
+            id: '14',
+            title: 'Smart Garden Monitoring System',
+            description: 'IoT-based automated garden monitoring and care system',
+            full_description: 'Creating an IoT system that monitors soil moisture, temperature, humidity, and light levels for garden plants. Automatically waters plants when needed and sends notifications about plant health status.',
+            completion_percentage: 60,
+            status: 'doing',
+            tags: ['demo', 'personal', 'iot', 'gardening', 'automation'],
+            subtasks: [
+              { name: 'Research plant care requirements', completed: true },
+              { name: 'Design sensor network', completed: true },
+              { name: 'Build hardware prototype', completed: true },
+              { name: 'Implement sensor data collection', completed: true },
+              { name: 'Create automated watering system', completed: false },
+              { name: 'Build mobile monitoring app', completed: false },
+            ],
+          },
+          {
+            id: '15',
+            title: 'Recipe Recommendation Engine',
+            description: 'AI-powered recipe suggestions based on available ingredients',
+            full_description: 'Developing a machine learning model that suggests recipes based on available ingredients, dietary preferences, and cooking history. Including nutritional analysis and meal planning features.',
+            completion_percentage: 40,
+            status: 'doing',
+            tags: ['demo', 'personal', 'ai', 'cooking', 'ml'],
+            subtasks: [
+              { name: 'Collect and clean recipe dataset', completed: true },
+              { name: 'Design recommendation algorithm', completed: true },
+              { name: 'Implement ingredient matching', completed: false },
+              { name: 'Add nutritional analysis', completed: false },
+              { name: 'Create meal planning features', completed: false },
+              { name: 'Build user interface', completed: false },
+            ],
+          },
+          {
+            id: '16',
+            title: 'Home Security System',
+            description: 'DIY home security system with computer vision',
+            full_description: 'Building a comprehensive home security system using Raspberry Pi, cameras, and computer vision. Features include motion detection, face recognition, mobile alerts, and cloud storage.',
+            completion_percentage: 20,
+            status: 'doing',
+            tags: ['demo', 'personal', 'security', 'computer-vision', 'raspberry-pi'],
+            subtasks: [
+              { name: 'Research security system requirements', completed: true },
+              { name: 'Design system architecture', completed: true },
+              { name: 'Set up Raspberry Pi hardware', completed: false },
+              { name: 'Implement motion detection', completed: false },
+              { name: 'Add face recognition capability', completed: false },
+              { name: 'Create mobile app', completed: false },
+            ],
+          },
+          {
+            id: '17',
+            title: 'Virtual Art Gallery',
+            description: '3D virtual gallery for showcasing digital artwork',
+            full_description: 'Creating an immersive 3D virtual art gallery where artists can showcase their digital artwork. Visitors can walk through the gallery using WASD controls and view art pieces in a realistic environment.',
+            completion_percentage: 10,
+            status: 'doing',
+            tags: ['demo', 'personal', '3d', 'art', 'webgl'],
+            subtasks: [
+              { name: 'Design gallery layout and navigation', completed: true },
+              { name: 'Research 3D web technologies (Three.js)', completed: true },
+              { name: 'Create 3D gallery environment', completed: false },
+              { name: 'Implement artwork display system', completed: false },
+              { name: 'Add artist profile pages', completed: false },
+              { name: 'Optimize performance', completed: false },
+            ],
+          },
+          {
+            id: '18',
+            title: 'Personal Health Tracker',
+            description: 'Comprehensive health and wellness tracking application',
+            full_description: 'Building a personal health tracker that monitors daily activities, sleep patterns, nutrition, and mood. Providing insights and recommendations to improve overall health and wellness.',
+            completion_percentage: 0,
+            status: 'to do',
+            tags: ['demo', 'personal', 'health', 'wellness', 'tracking'],
+            subtasks: [
+              { name: 'Research health tracking methodologies', completed: false },
+              { name: 'Design user interface', completed: false },
+              { name: 'Implement activity tracking', completed: false },
+              { name: 'Add sleep monitoring features', completed: false },
+              { name: 'Create nutrition tracking', completed: false },
+              { name: 'Build analytics dashboard', completed: false },
+            ],
+          },
+
+          // LEARNING & DEVELOPMENT PROJECTS
+          {
+            id: '19',
+            title: 'Rust Programming Mastery',
+            description: 'Learning Rust for systems programming and performance',
+            full_description: 'Diving deep into Rust programming language through practical projects. Building command-line tools, web servers, and exploring Rust\'s ownership model and memory safety features.',
+            completion_percentage: 70,
+            status: 'doing',
+            tags: ['demo', 'learning', 'rust', 'systems-programming'],
+            subtasks: [
+              { name: 'Complete Rust basics tutorial', completed: true },
+              { name: 'Build command-line calculator', completed: true },
+              { name: 'Implement web server with Actix-web', completed: true },
+              { name: 'Explore async/await patterns', completed: true },
+              { name: 'Build a mini text editor', completed: false },
+              { name: 'Contribute to open source Rust project', completed: false },
+            ],
+          },
+          {
+            id: '20',
+            title: 'Quantum Computing Fundamentals',
+            description: 'Learning quantum computing concepts and Q# programming',
+            full_description: 'Studying quantum computing principles including qubits, quantum gates, and quantum algorithms. Implementing quantum programs using Microsoft Q# and exploring quantum machine learning.',
+            completion_percentage: 50,
+            status: 'doing',
+            tags: ['demo', 'learning', 'quantum', 'qsharp', 'microsoft'],
+            subtasks: [
+              { name: 'Study quantum mechanics basics', completed: true },
+              { name: 'Learn Q# programming language', completed: true },
+              { name: 'Implement basic quantum gates', completed: true },
+              { name: 'Build quantum random number generator', completed: false },
+              { name: 'Explore quantum algorithms (Grover, Shor)', completed: false },
+              { name: 'Research quantum machine learning', completed: false },
+            ],
+          },
+          {
+            id: '21',
+            title: 'Cybersecurity Certification Study',
+            description: 'Preparing for CISSP and OSCP certifications',
+            full_description: 'Comprehensive study program for cybersecurity certifications including CISSP (Certified Information Systems Security Professional) and OSCP (Offensive Security Certified Professional).',
+            completion_percentage: 80,
+            status: 'doing',
+            tags: ['demo', 'learning', 'cybersecurity', 'certification'],
+            subtasks: [
+              { name: 'Study information security concepts', completed: true },
+              { name: 'Complete CISSP practice exams', completed: true },
+              { name: 'Learn penetration testing techniques', completed: true },
+              { name: 'Set up penetration testing lab', completed: true },
+              { name: 'Take OSCP practice challenges', completed: false },
+              { name: 'Schedule certification exams', completed: false },
+            ],
+          },
+          {
+            id: '22',
+            title: 'Machine Learning from Scratch',
+            description: 'Implementing ML algorithms without frameworks',
+            full_description: 'Deep dive into machine learning by implementing popular algorithms from scratch using only NumPy. Understanding the mathematical foundations and optimizing for performance.',
+            completion_percentage: 30,
+            status: 'doing',
+            tags: ['demo', 'learning', 'machine-learning', 'numpy', 'mathematics'],
+            subtasks: [
+              { name: 'Study linear algebra and statistics', completed: true },
+              { name: 'Implement linear regression from scratch', completed: true },
+              { name: 'Build decision tree algorithm', completed: true },
+              { name: 'Implement neural network from scratch', completed: false },
+              { name: 'Add clustering algorithms (K-means, DBSCAN)', completed: false },
+              { name: 'Optimize implementations for performance', completed: false },
+            ],
+          },
+          {
+            id: '23',
+            title: 'Web3 and DeFi Development',
+            description: 'Learning blockchain development and decentralized finance',
+            full_description: 'Exploring Web3 development by building decentralized applications (dApps) and smart contracts. Understanding DeFi protocols and implementing automated market makers.',
+            completion_percentage: 20,
+            status: 'doing',
+            tags: ['demo', 'learning', 'web3', 'defi', 'smart-contracts'],
+            subtasks: [
+              { name: 'Study blockchain fundamentals', completed: true },
+              { name: 'Learn Solidity programming', completed: true },
+              { name: 'Build basic smart contracts', completed: false },
+              { name: 'Create ERC-20 token', completed: false },
+              { name: 'Implement decentralized exchange', completed: false },
+              { name: 'Deploy to testnet/mainnet', completed: false },
+            ],
+          },
+
+          // LIFE & WELLNESS PROJECTS
+          {
+            id: '24',
+            title: 'Fitness Goal Achievement',
+            description: 'Structured fitness program with measurable milestones',
+            full_description: 'Following a comprehensive 12-week fitness program combining strength training, cardio, and flexibility work. Tracking progress through various metrics and adjusting workout intensity based on results.',
+            completion_percentage: 85,
+            status: 'doing',
+            tags: ['demo', 'life', 'fitness', 'health', 'goals'],
+            subtasks: [
+              { name: 'Design personalized workout plan', completed: true },
+              { name: 'Establish baseline measurements', completed: true },
+              { name: 'Complete 4-week strength training phase', completed: true },
+              { name: 'Complete 4-week cardio improvement phase', completed: true },
+              { name: 'Start 4-week flexibility and maintenance phase', completed: false },
+              { name: 'Achieve target weight and muscle mass goals', completed: false },
+            ],
+          },
+          {
+            id: '25',
+            title: 'Home Kitchen Renovation',
+            description: 'Complete kitchen remodel with modern appliances and design',
+            full_description: 'Planning and executing a full kitchen renovation including new cabinets, countertops, appliances, and lighting. Managing the project timeline and budget while coordinating with contractors.',
+            completion_percentage: 60,
+            status: 'doing',
+            tags: ['demo', 'life', 'home-improvement', 'renovation'],
+            subtasks: [
+              { name: 'Create kitchen design and layout', completed: true },
+              { name: 'Obtain necessary permits', completed: true },
+              { name: 'Order cabinets and appliances', completed: true },
+              { name: 'Coordinate demolition and installation', completed: true },
+              { name: 'Install backsplash and final touches', completed: false },
+              { name: 'Final inspection and cleanup', completed: false },
+            ],
+          },
+          {
+            id: '26',
+            title: 'Wedding Planning Process',
+            description: 'Comprehensive wedding planning for next summer',
+            full_description: 'Planning a wedding for 150 guests including venue selection, catering, photography, music, and decorations. Managing vendors, budget, and timeline to ensure a perfect celebration.',
+            completion_percentage: 40,
+            status: 'doing',
+            tags: ['demo', 'life', 'wedding', 'planning', 'events'],
+            subtasks: [
+              { name: 'Set wedding budget and guest list', completed: true },
+              { name: 'Research and book venue', completed: true },
+              { name: 'Choose wedding theme and colors', completed: true },
+              { name: 'Book photographer and catering', completed: false },
+              { name: 'Plan honeymoon itinerary', completed: false },
+              { name: 'Send save-the-dates and invitations', completed: false },
+            ],
+          },
+          {
+            id: '27',
+            title: 'Language Learning Journey',
+            description: 'Achieving conversational fluency in Spanish',
+            full_description: 'Dedicated Spanish language learning program using multiple methods including online courses, conversation practice, and cultural immersion activities. Target: conversational fluency within 18 months.',
+            completion_percentage: 75,
+            status: 'doing',
+            tags: ['demo', 'life', 'language-learning', 'spanish', 'culture'],
+            subtasks: [
+              { name: 'Complete beginner Spanish course', completed: true },
+              { name: 'Master basic grammar and vocabulary', completed: true },
+              { name: 'Start conversation practice sessions', completed: true },
+              { name: 'Watch Spanish movies without subtitles', completed: true },
+              { name: 'Plan immersion trip to Spanish-speaking country', completed: false },
+              { name: 'Take formal Spanish proficiency exam', completed: false },
+            ],
+          },
+          {
+            id: '28',
+            title: 'Photography Portfolio Development',
+            description: 'Building professional photography portfolio and skills',
+            full_description: 'Developing photography skills across multiple genres including portraits, landscapes, and street photography. Building a professional portfolio and learning post-processing techniques.',
+            completion_percentage: 30,
+            status: 'doing',
+            tags: ['demo', 'life', 'photography', 'creative', 'portfolio'],
+            subtasks: [
+              { name: 'Study photography fundamentals', completed: true },
+              { name: 'Learn composition and lighting techniques', completed: true },
+              { name: 'Practice with different camera equipment', completed: false },
+              { name: 'Build photography portfolio website', completed: false },
+              { name: 'Participate in photography competitions', completed: false },
+              { name: 'Attend photography workshops and events', completed: false },
+            ],
+          },
+          {
+            id: '29',
+            title: 'Car Restoration Project',
+            description: 'Classic car restoration - 1967 Ford Mustang',
+            full_description: 'Restoring a classic 1967 Ford Mustang to showroom condition. Including engine rebuild, body work, interior restoration, and period-correct modifications.',
+            completion_percentage: 15,
+            status: 'doing',
+            tags: ['demo', 'life', 'automotive', 'restoration', 'classic-car'],
+            subtasks: [
+              { name: 'Assess current car condition and create restoration plan', completed: true },
+              { name: 'Source original and reproduction parts', completed: true },
+              { name: 'Disassemble car for restoration', completed: false },
+              { name: 'Restore engine and transmission', completed: false },
+              { name: 'Complete body work and painting', completed: false },
+              { name: 'Restore interior and final assembly', completed: false },
+            ],
+          },
+          {
+            id: '30',
+            title: 'Meditation and Mindfulness Practice',
+            description: 'Daily meditation practice for mental wellness and stress reduction',
+            full_description: 'Establishing a consistent daily meditation practice using various techniques including mindfulness, breathing exercises, and body scan meditations to improve mental clarity and reduce stress.',
+            completion_percentage: 0,
+            status: 'to do',
+            tags: ['demo', 'life', 'meditation', 'mindfulness', 'wellness'],
+            subtasks: [
+              { name: 'Research meditation techniques and benefits', completed: false },
+              { name: 'Set up dedicated meditation space', completed: false },
+              { name: 'Start with 10-minute daily sessions', completed: false },
+              { name: 'Gradually increase session duration', completed: false },
+              { name: 'Join meditation community or group', completed: false },
+              { name: 'Track progress and mental wellness metrics', completed: false },
             ],
           },
         ];
       });
       const [expandedProjects, setExpandedProjects] = useState({});
       const [showForm, setShowForm] = useState(false);
+      const [showResetDialog, setShowResetDialog] = useState(false);
 
       useEffect(() => {
         localStorage.setItem('ideaFlowProjects', JSON.stringify(projects));
@@ -459,6 +966,11 @@
         setProjects(updatedProjects);
     };
 
+    const resetBoard = () => {
+        localStorage.removeItem('ideaFlowProjects');
+        window.location.reload();
+    };
+
        const exportAsJpg = () => {
          const board = document.querySelector('#ideaFlowBoard');
          window.html2canvas(board).then((canvas) => {
@@ -492,13 +1004,27 @@
 
        return (
          <div className="container mx-auto p-4 max-w-3xl">
-           <h1 className="text-2xl font-bold mb-4">IdeaFlow: Your Project Board that just Flows!</h1>
+           <h1 className="text-2xl font-bold mb-2">IdeaFlow: Your Project Board that just Flows!</h1>
+           <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4 rounded">
+             <div className="flex items-center">
+               <div className="text-yellow-700">
+                 <div className="font-bold text-center mb-3">DEMO MODE</div>
+                 <div className="text-sm text-center">The demo data showcases the powerful extent of this private project management webapp across work, personal projects and life goals. You can freely modify or delete any of this to create your own project board.</div>
+               </div>
+             </div>
+           </div>
            <div className="mb-4 flex items-center">
              <button
-               className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mr-auto"
+               className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mr-2"
                onClick={() => setShowForm(true)}
              >
                Add Idea
+             </button>
+             <button
+               className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 mr-auto"
+               onClick={() => setShowResetDialog(true)}
+             >
+              Clear Board
              </button>
              <div className="flex space-x-2 mx-auto">
                <button
@@ -549,9 +1075,9 @@
                reader.readAsText(file);
              }}/>
            </div>
-           <div id="ideaFlowBoard">
+           <div id="ideaFlowBoard" className="flex flex-col md:flex-row overflow-x-auto md:overflow-visible gap-4 pb-4">
              {blocks.map((block) => (
-               <div key={block.status} className={`mb-6 p-4 rounded-lg ${block.bgColor}`}>
+               <div key={block.status} className={`flex-shrink-0 w-full md:w-80 p-4 rounded-lg ${block.bgColor}`}>
                  <h2 className={`text-xl font-semibold text-white p-2 rounded ${block.headerColor}`}>
                    {block.title}
                  </h2>
@@ -578,6 +1104,57 @@
                onAddProject={addProject}
                onClose={() => setShowForm(false)}
              />
+           )}
+           {showResetDialog && (
+             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+               <div className="bg-white p-6 rounded-lg w-full max-w-md">
+                 <h2 className="text-xl font-bold mb-4 text-red-600">⚠️ Reset Board - Data Loss Warning</h2>
+                 <div className="mb-4">
+                   <p className="text-gray-800 mb-2">
+                     <strong>This action will permanently delete all your current project data:</strong>
+                   </p>
+                   <ul className="list-disc pl-5 text-gray-700 text-sm mb-3">
+                     <li>All projects currently on your board</li>
+                     <li>All project details, descriptions, and full descriptions</li>
+                     <li>All progress tracking and completion percentages</li>
+                     <li>All tags and categories</li>
+                     <li>All subtasks and their completion status</li>
+                     <li>All custom project modifications</li>
+                   </ul>
+                   <p className="text-gray-700 text-sm mb-2">
+                     <strong>After reset:</strong>
+                   </p>
+                   <ul className="list-disc pl-5 text-gray-700 text-sm mb-3">
+                     <li>Board will reload with original demo data (30 sample projects)</li>
+                     <li>All current progress will be lost forever</li>
+                     <li>Action cannot be undone</li>
+                   </ul>
+                   <div className="bg-red-50 border border-red-200 rounded p-3 mb-3">
+                     <p className="text-red-700 text-sm">
+                       <strong>Recommendation:</strong> Use "Export Board (JSON)" before resetting to backup your data.
+                     </p>
+                   </div>
+                 </div>
+                 <div className="flex justify-end space-x-2">
+                   <button
+                     onClick={() => setShowResetDialog(false)}
+                     className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
+                   >
+                     Cancel
+                   </button>
+                   <button
+                     onClick={() => {
+                       if (window.confirm("Are you absolutely sure? This will delete ALL your current projects permanently!")) {
+                         resetBoard();
+                       }
+                     }}
+                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                   >
+                     Yes, Delete Everything
+                   </button>
+                 </div>
+               </div>
+             </div>
            )}
          </div>
        );
